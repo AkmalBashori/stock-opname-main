@@ -1,0 +1,49 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {},
+    "prefix": "C:\\Users\\ASUS\\Downloads\\stock-opname-main\\stock-opname-main\\.codex-vercel-cli\\install"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "C:\\Users\\ASUS\\.pnpm-store\\v3",
+    "virtualStoreDir": "C:\\Users\\ASUS\\Downloads\\stock-opname-main\\stock-opname-main\\.codex-vercel-cli\\install\\node_modules\\.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "C:\\Users\\ASUS\\Downloads\\stock-opname-main\\stock-opname-main\\.codex-vercel-cli\\install",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "code": "ERR_INVALID_THIS"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/vercel"
+  },
+  "5 debug pnpm:request-retry": {
+    "attempt": 2,
+    "error": {
+      "code": "ERR_INVALID_THIS"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 60000,
+    "url": "https://registry.npmjs.org/vercel"
+  },
+  "6 error pnpm": {
+    "code": "ERR_PNPM_META_FETCH_FAIL",
+    "attempts": 1,
+    "pkgsStack": [],
+    "err": {
+      "name": "pnpm",
+      "message": "GET https://registry.npmjs.org/vercel: Value of \"this\" must be of type URLSearchParams",
+      "code": "ERR_PNPM_META_FETCH_FAIL",
+      "stack": "pnpm: GET https://registry.npmjs.org/vercel: Value of \"this\" must be of type URLSearchParams\n    at RetryOperation._fn (C:\\Users\\ASUS\\Downloads\\stock-opname-main\\stock-opname-main\\.codex-vercel-cli\\pnpm.cjs:84827:18)"
+    }
+  }
+}

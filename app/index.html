@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Opname</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Stock opname</p>
+          <h1>Famatex</h1>
+        </div>
+        <div class="topbar__actions">
+          <button class="ghost" id="newSessionBtn" type="button">New tanggal</button>
+          <button class="ghost" id="loadSampleBtn" type="button">Load sample</button>
+          <button class="ghost" id="clearBtn" type="button">Clear</button>
+          <button class="ghost" id="loadDbBtn" type="button">Load DB</button>
+          <button class="ghost" id="saveDbBtn" type="button">Save DB</button>
+          <button class="ghost" id="exportPdfBtn" type="button">Export PDF</button>
+          <button class="primary" id="exportBtn" type="button">Export CSV</button>
+        </div>
+      </header>
+      <p class="cloud-status" id="cloudStatus" role="status" aria-live="polite"></p>
+
+      <section class="session-panel" aria-label="Stock opname produksi details">
+        <label>
+          Open saved tanggal
+          <select id="sessionPicker"></select>
+        </label>
+        <label>
+          Tanggal
+          <input id="countDate" type="date" />
+        </label>
+        <label>
+          Mesin
+          <input id="locationName" type="text" value="Famatex Dayeuhkolot" />
+        </label>
+        <input id="sessionName" type="hidden" value="" />
+      </section>
+
+      <section class="metrics" aria-label="Summary">
+        <article>
+          <span>Total items</span>
+          <strong id="totalItems">0</strong>
+        </article>
+        <article>
+          <span>Counted</span>
+          <strong id="countedItems">0</strong>
+        </article>
+        <article>
+          <span>Total Yard</span>
+          <strong id="varianceUnits">0</strong>
+        </article>
+      </section>
+
+      <section class="workbench">
+        <div class="toolbar" aria-label="Table controls">
+          <div class="searchbox">
+            <span aria-hidden="true">&#8981;</span>
+            <input id="searchInput" type="search" placeholder="Search kode produksi or warna" />
+          </div>
+          <div class="toolbar__buttons">
+            <button class="ghost" id="importBtn" type="button">Import CSV</button>
+            <input id="importFile" type="file" accept=".csv,text/csv" hidden />
+            <button class="ghost" id="importPdfBtn" type="button">Import PDF</button>
+            <input id="importPdfFile" type="file" accept=".pdf,application/pdf" hidden />
+            <button class="primary" id="addRowBtn" type="button">Add item</button>
+          </div>
+        </div>
+        <p class="import-status" id="importStatus" role="status" aria-live="polite"></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Jam</th>
+                <th>Kode Produksi</th>
+                <th>Warna</th>
+                <th>Proses Produksi</th>
+                <th>Party</th>
+                <th>Yard</th>
+                <th>Total Yard</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th aria-label="Actions"></th>
+              </tr>
+            </thead>
+            <tbody id="itemRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="rowTemplate">
+      <tr>
+        <td data-label="Jam">
+          <input class="cell-input time-input time-entry" type="text" inputmode="numeric" maxlength="5" placeholder="0600" />
+        </td>
+        <td data-label="Kode Produksi">
+          <input class="cell-input sku-input" type="text" placeholder="Kode Produksi" />
+        </td>
+        <td data-label="Warna">
+          <input class="cell-input product-input" type="text" placeholder="Warna" />
+        </td>
+        <td data-label="Proses Produksi">
+          <select class="cell-input process-input">
+            <option value="TCRON">TCRON</option>
+            <option value="TPS">TPS</option>
+            <option value="TOP">TOP</option>
+            <option value="RESUL">RESUL</option>
+          </select>
+        </td>
+        <td data-label="Party">
+          <input class="cell-input party-input system-input" type="text" inputmode="numeric" maxlength="5" placeholder="0118" />
+        </td>
+        <td data-label="Yard">
+          <input class="cell-input number-input counted-input" type="number" min="0" step="0.01" />
+        </td>
+        <td data-label="Total Yard">
+          <output class="variance-pill">0</output>
+        </td>
+        <td data-label="Status">
+          <select class="cell-input status-input">
+            <option value="berhasil">Berhasil</option>
+            <option value="gagal">Gagal</option>
+          </select>
+        </td>
+        <td data-label="Notes">
+          <input class="cell-input notes-input" type="text" placeholder="Optional" />
+        </td>
+        <td class="row-actions">
+          <button class="icon-button delete-row" type="button" aria-label="Delete row">&times;</button>
+        </td>
+      </tr>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
